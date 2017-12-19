@@ -25,22 +25,34 @@ syntax = {
         'alias', 'area', 'arid',  'artist', 'artistaccent', 'begin', 'beginarea',
         'comment', 'country', 'end', 'endarea', 'ended', 'gender', 'ipi',
         'sortname', 'tag', 'type'],
-    'area': [],
-    'cdstub': [],
-    'label': [],
+    'area': [
+        'aid', 'alias', 'area', 'begin', 'comment', 'end', 'ended', 'iso',
+        'iso1', 'iso2', 'iso3', 'sortname', 'type'],
+    'cdstub': [
+        'artist', 'barcode', 'comment', 'discid', 'title', 'tracks'],
+    'label': [
+        'alias', 'area', 'begin', 'code', 'comment', 'country',
+        'end', 'ended', 'ipi', 'label', 'labelaccent', 'laid',
+        'sortname', 'type', 'tag'],
     'recording': [
         'arid', 'artist', 'artistname', 'creditname', 'comment', 'country',
         'date', 'dur', 'format', 'isrc', 'number', 'position', 'primarytype',
         'qdur', 'recording', 'recordingaccent', 'reid', 'release', 'rgid',
         'rid', 'secondarytype', 'status', 'tid', 'tnum', 'tracks', 'tracksrelease',
         'tag', 'type', 'video'],
-    'release-group': [],
+    'release-group': [
+        'arid', 'artist', 'artistname', 'comment', 'creditname', 'primarytype', 'rgid',
+        'releasegroup', 'releasegroupaccent', 'releases', 'release', 'reid',
+        'secondarytype', 'status', 'tag', 'type'],
     'release': [
         'arid', 'artist', 'artistname', 'comment', 'creditname', 'primarytype',
         'rgid', 'releasegroup', 'releasegroupaccent', 'releases', 'release',
         'reid', 'secondarytyp', 'status', 'tag', 'type'],
-    'tag': [],
-    'work': []
+    'tag': [
+        'tag'],
+    'work': [
+        'alias', 'arid', 'artist', 'comment', 'iswc', 'lang', 'tag', 'type',
+        'wid', 'work', 'workaccent']
 }
 
 
@@ -160,9 +172,26 @@ class MusicBrainzApi(object):
 
         return await self.__call__('artist', query, kwargs=kwargs)
 
-    def get_label(self, query='', **kwargs):
-        raise(MusicBrainzException('%s not implemented yet' % __name__))
-        # return self.__call__('label', query, kwargs=kwargs)
+    async def get_label(self, query='', **kwargs):
+        '''
+        alias          the aliases/misspellings for this label
+        area           label area
+        begin          label founding date
+        code           label code (only the figures part, i.e. without "LC")
+        comment        label comment to differentiate similar labels
+        country        The two letter country code of the label country
+        end            label dissolution date
+        ended          true if know ended even if do not know end date
+        ipi            ipi
+        label          label name
+        labelaccent    name of the label with any accent characters retained
+        laid           MBID of the label
+        sortname       label sortname
+        type           label type
+        tag            folksonomy tag
+        '''
+
+        return await self.__call__('label', query, kwargs=kwargs)
 
     async def get_release(self, query='', **kwargs):
         '''
