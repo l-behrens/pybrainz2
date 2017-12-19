@@ -5,7 +5,18 @@
 https://musicbrainz.org/
 
 ## NOTE!!!
-This Version is far from release. It arose to fit my needs for another project.
+Following categories are implemented:
+* artist
+* label
+* release
+* recording
+
+Following categories are not implemented
+* area
+* cdstub
+* release-group
+* tag
+* work
 
 ## Description
 Python wrapper for public MusicBrainz API. The API Documentation:
